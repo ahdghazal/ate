@@ -16,12 +16,26 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'age' => 'required|integer',
+            'gender' => 'required|in:male,female',
+            'height' => 'required|numeric',
+            'weight' => 'required|numeric',
+            'goal' => 'required|in:lose,gain,maintain',
         ]);
+
+        $heightM = $request->height / 100;
+        $bmi = $request->weight / ($heightM ** 2);    
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'age' => $request->age,
+            'gender' => $request->gender,
+            'height' => $request->height,
+            'weight' => $request->weight,
+            'goal' => $request->goal,
+            'bmi' => round($bmi,2),
         ]);
 
         return response()->json($user, 201);
