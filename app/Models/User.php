@@ -25,6 +25,8 @@ class User extends Authenticatable
         'age',
         'weight',
         'height',
+        'bmi',
+        'goal',
         'verification_token',
         'is_admin',
     ];
@@ -49,7 +51,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-        public function foodLogs()
+    public function foodLogs()
     {
         return $this->hasMany(FoodLog::class);
     }
@@ -62,5 +64,10 @@ class User extends Authenticatable
     public function workouts()
     {
         return $this->hasMany(Workout::class);
+    }
+
+    public function calculateBMI()
+    {
+        return round($this->weight / pow(($this->height / 100), 2), 1);
     }
 }

@@ -20,4 +20,9 @@ class FoodLog extends Model
         return $this->belongsTo(Food::class);
     }
 
+    public function totalCalories()
+    {
+        return $this->quantity * $this->food->calories;
+    }
+
 }
