@@ -21,6 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
+        'age',
+        'weight',
+        'height',
+        'verification_token',
+        'is_admin',
     ];
 
     /**
@@ -42,4 +48,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+        public function foodLogs()
+    {
+        return $this->hasMany(FoodLog::class);
+    }
+
+    public function waterLogs()
+    {
+        return $this->hasMany(WaterLog::class);
+    }
+
+    public function workouts()
+    {
+        return $this->hasMany(Workout::class);
+    }
 }

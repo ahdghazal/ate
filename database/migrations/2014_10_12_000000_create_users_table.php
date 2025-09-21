@@ -19,6 +19,13 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->integer('age')->nullable();
+            $table->enum('gender', ['male','female'])->nullable();
+            $table->float('height')->nullable(); // cm
+            $table->float('weight')->nullable(); // kg
+            $table->enum('goal', ['lose','gain','maintain'])->nullable();
+            $table->float('bmi')->nullable();
+
         });
     }
 
